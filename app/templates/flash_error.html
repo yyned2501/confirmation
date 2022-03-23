@@ -1,0 +1,20 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible text-center" role="alert">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% if form and form.errors %}
+    {% for k,v in form.errors.items() %}
+        {% for error in v %}
+            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <strong>{{ error }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

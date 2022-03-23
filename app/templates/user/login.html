@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}登录{% endblock %}
+{% block content %}
+    <div class="container" style="padding-top: 60px">
+        {% include "flash_error.html" %}
+        <form class="form-signin" action="{{ url_for('user.login') }}" method=POST>
+            <h2 class="form-signin-heading">请登录</h2>
+            {{ input("username","inputEmail","form-control first","请输入用户名","username") }}
+            {{ input("password","inputPassword","form-control last","请输入密码","password") }}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        </form>
+    </div>
+{% endblock %}
+
+
+{%- macro input(name,id,class="",placeholder="",type="text",value="")-%}
+    <label for="{{ id }}" class="sr-only">{{ id }}</label>
+    <input type="{{ type }}" id="{{ id }}" name="{{ name }}" class="{{ class }}" placeholder="{{ placeholder }}"
+           value="{{ value }}" required>
+{%- endmacro -%}

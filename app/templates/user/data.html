@@ -1,0 +1,13 @@
+{% extends"base.html" %}
+{% block title %}用户资料{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 text-right"><strong>用户名：</strong></div>
+        <div class="col-xs-6 col-sm-9">{{ current_user.username }}</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 text-right"><strong>权限：</strong></div>
+        <div class="col-xs-6 col-sm-9">{{ current_user.role.name }}</div>
+    </div>
+{% endblock %}

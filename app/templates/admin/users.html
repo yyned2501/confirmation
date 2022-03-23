@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}用户管理{% endblock %}
+{% block main %}
+    <h1>用户管理</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+			<tbody>
+            {% for user in users %}
+                {% include "admin/user.html" %}
+            {% endfor %}
+            </tbody>
+            <thead>
+            <tr>
+                <th>用户名</th>
+                <th>用户类型</th>
+                <th>注册时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <button class="btn-xs btn-danger"
+            onclick=link("{{ url_for('admin.add_user') }}")>添加用户
+    </button>
+{% endblock %}

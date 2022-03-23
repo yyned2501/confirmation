@@ -1,0 +1,93 @@
+{% extends "bootstrap/base.html" %}
+{% block html_attribs %} lang="zh-CN"{% endblock %}
+{%- block metas %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ super() }}
+{%- endblock metas %}
+{%- block styles %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+    <link href='{{ url_for("static",filename="css/base.css") }}' rel="stylesheet">
+    <link href={{ url_for("static",filename="css/user.css") }} rel="stylesheet">
+
+
+{%- endblock styles %}
+{%- block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/ie-emulation-modes-warning.js') }}" rel="stylesheet"></script>
+    <script src="{{ url_for('static', filename='js/holder.min.js') }}" rel="stylesheet"></script>
+    <script src="{{ url_for('static', filename='js/ie10-viewport-bug-workaround.js') }}" rel="stylesheet"></script>
+	<script src={{ url_for("static",filename="js/myscripts.js") }}></script>
+
+
+{%- endblock scripts %}
+{% block navbar %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}">首页</a>
+                {%- if current_user.is_active %}
+                    <a class="navbar-brand right" href="{{ url_for("user.logout") }}">注销</a>
+                {%- else %}
+                    <a class="navbar-brand right" href="{{ url_for("user.login") }}">登录</a>
+                {%- endif %}
+            </div>
+            <div id="navbar" class="collapse" aria-expanded="false" aria-controls="navbar">
+                <ul class="nav navbar-nav nav-stacked">
+                    {%- for i in navs_link %}
+                        {%- if current_user.can(navs_link[i].permission) %}
+                            <li {% if navs_link[i].dropdown -%} class="dropdown" {%- endif -%}>
+                                {%- if navs_link[i].dropdown -%}
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">{{ i }}
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        {%- for j in navs_link[i].dropdown %}
+                                            {%- if current_user.can(j.permission) %}
+                                                <li><a href="{{ url_for(j.href) }}">{{ j.name }}</a></li>
+                                            {%- endif %}
+                                        {%- endfor %}
+                                    </ul>
+                                {%- endif %}
+                            </li>
+                        {%- endif %}
+                    {%- endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{%- endblock navbar %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                {% for i in navs_link %}
+                    {% if current_user.can(navs_link[i].permission) %}
+                        <ul class="nav nav-sidebar">
+                            <li><b style="color: aliceblue">{{ i }}</b></li>
+                            {% for j in navs_link[i].dropdown %}
+                                {% if current_user.can(j.permission) %}
+                                    <li><a href="{{ url_for(j.href) }}">{{ j.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {%- block main %}
+                {%- endblock main %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

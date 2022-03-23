@@ -1,0 +1,76 @@
+body {
+    font-family: SimSun;
+    /*padding-top: 60px;*/
+    font-size: 12pt;
+}
+
+p {
+    text-align: left;
+    text-indent: 2em;
+}
+
+.indent {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.graph {
+    padding-bottom: 10px;
+}
+
+.graph p {
+    margin-bottom: 2px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 26.25pt;
+    padding-bottom: 20px;
+
+}
+
+.border {
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid black;
+    page-break-inside: avoid;
+}
+
+.border div {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    /*table-layout: fixed;*/
+    width: 100%;
+    /*font-size: 11pt;*/
+}
+
+td {
+    /*padding-right: 5px;*/
+    word-wrap: break-word;
+    word-break: break-all;
+    border: 1px solid #333;
+    height: 32px;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 5%;
+}
+
+thead {
+    display: table-header-group;
+
+}
+
+thead td {
+    text-align: center;
+    padding: unset;
+}
+
+caption {
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #333;
+}

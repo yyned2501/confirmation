@@ -1,0 +1,22 @@
+<tr>
+    <td>{{ user.username }}</td>
+    <td>{{ user.role.name }}</td>
+    <td>{{ user.create_time }}</td>
+    <td>{% if user.valid ==1 %}使用中{% else %}已禁用{% endif %}</td>
+    <td>
+        <button class="btn-xs btn-danger"
+                onclick=get_alert("{{ url_for('admin.setpassword',user_id=user.id) }}")>恢复密码
+        </button>
+        {% if user.valid ==1 %}
+            <button class="btn-xs btn-danger"
+                    onclick=get_change(this,"TR","td#valid","{{ url_for('admin.delete',user_id=user.id) }}")>
+                禁用
+            </button>
+        {% else %}
+            <button class="btn-xs btn-danger"
+                    onclick=get_change(this,"TR","td#valid","{{ url_for('admin.restore',user_id=user.id) }}")>
+                恢复
+            </button>
+        {% endif %}
+    </td>
+</tr>

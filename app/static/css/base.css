@@ -1,0 +1,31 @@
+body {
+    background-color: #eee;
+    height: 100%;
+}
+
+
+.navbar-header {
+    float: none
+}
+
+a.navbar-brand.right {
+    float: right
+}
+
+.dark {
+    background-color: #222;
+    height: 100%;
+}
+
+.nav > li > a {
+    color: #aaa
+}
+
+ul {
+    border-bottom: #aaa solid 1px;
+}
+
+td, th {
+    border: 1px #ccc solid;
+    vertical-align: middle;
+}
